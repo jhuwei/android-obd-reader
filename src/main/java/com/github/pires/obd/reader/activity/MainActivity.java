@@ -81,35 +81,35 @@ import static com.github.pires.obd.reader.activity.ConfigActivity.getGpsUpdatePe
 public class MainActivity extends RoboActivity implements ObdProgressListener, LocationListener, GpsStatus.Listener {
 
     private static final String TAG = MainActivity.class.getName();
-    private static final int NO_BLUETOOTH_ID = 0;
-    private static final int BLUETOOTH_DISABLED = 1;
-    private static final int START_LIVE_DATA = 2;
-    private static final int STOP_LIVE_DATA = 3;
-    private static final int SETTINGS = 4;
-    private static final int GET_DTC = 5;
+    private static final int NO_BLUETOOTH_ID = 0; //沒有藍牙ID
+    private static final int BLUETOOTH_DISABLED = 1; //藍芽關閉
+    private static final int START_LIVE_DATA = 2; //啟用現在數據
+    private static final int STOP_LIVE_DATA = 3; //停止現在數據
+    private static final int SETTINGS = 4; //設定
+    private static final int GET_DTC = 5; //取得 DTC
     private static final int TABLE_ROW_MARGIN = 7;
-    private static final int NO_ORIENTATION_SENSOR = 8;
-    private static final int NO_GPS_SUPPORT = 9;
-    private static final int TRIPS_LIST = 10;
-    private static final int SAVE_TRIP_NOT_AVAILABLE = 11;
-    private static final int REQUEST_ENABLE_BT = 1234;
-    private static boolean bluetoothDefaultIsEnable = false;
+    private static final int NO_ORIENTATION_SENSOR = 8; //沒有方向SENSOR
+    private static final int NO_GPS_SUPPORT = 9; //GPS SUPPORT
+    private static final int TRIPS_LIST = 10; //行程列表
+    private static final int SAVE_TRIP_NOT_AVAILABLE = 11; //沒有 儲存 旅程 可用
+    private static final int REQUEST_ENABLE_BT = 1234; //請求可用的藍芽
+    private static boolean bluetoothDefaultIsEnable = false; //藍芽默認啟用
 
     static {
-        RoboGuice.setUseAnnotationDatabases(false);
+        RoboGuice.setUseAnnotationDatabases(false); //使用註解數據庫 (false)
     }
 
-    public Map<String, String> commandResult = new HashMap<String, String>();
-    boolean mGpsIsStarted = false;
+    public Map<String, String> commandResult = new HashMap<String, String>(); //註解結果
+    boolean mGpsIsStarted = false; //GPS
     private LocationManager mLocService;
     private LocationProvider mLocProvider;
-    private LogCSVWriter myCSVWriter;
+    private LogCSVWriter myCSVWriter; //日誌CSV寫入器
     private Location mLastLocation;
     /// the trip log
-    private TripLog triplog;
-    private TripRecord currentTrip;
+    private TripLog triplog; //行程LOG
+    private TripRecord currentTrip; //行程記錄
 
-    @InjectView(R.id.compass_text)
+    @InjectView(R.id.compass_text)  //取得三軸感應器後寫入方向
     private TextView compass;
     private final SensorEventListener orientListener = new SensorEventListener() {
 
@@ -137,7 +137,7 @@ public class MainActivity extends RoboActivity implements ObdProgressListener, L
         }
 
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
-            // do nothing
+            // do nothing 精準SENSOR (沒有使用)
         }
     };
     @InjectView(R.id.BT_STATUS)
